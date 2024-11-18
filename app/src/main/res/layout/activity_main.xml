@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,13 +8,102 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- ScrollView để chứa nội dung chính -->
+    <ScrollView
+        android:id="@+id/scroll_View"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_NaView">
 
+        <!-- LinearLayout để sắp xếp nội dung -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <!-- Khu vực thông tin người dùng -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <!-- Ảnh người dùng -->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/img_User"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/profile"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!-- Dòng chữ "Welcome" -->
+                <TextView
+                    android:id="@+id/tv_wCome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Welcome"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toEndOf="@+id/img_User"
+                    app:layout_constraintTop_toTopOf="@+id/img_User" />
+
+                <!-- Tên người dùng -->
+                <TextView
+                    android:id="@+id/tv_User"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:text="Tên người dùng"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/img_User"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_wCome" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Hình ảnh minh họa -->
+            <ImageView
+                android:id="@+id/img_Banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                app:itemIconTint="@drawable/menu_custom"
+                app:itemTextColor="@drawable/menu_custom"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_buncha" />
+            <TextView
+                android:id="@+id/tv_ThucDon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Thực đơn"
+                android:textColor="@color/black"
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                 />
+            <!-- RecyclerView cho danh mục -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/re_Cate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </ScrollView>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_NaView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#FF0000"
+        app:itemIconTint="@drawable/menu_custom"
+        app:itemTextColor="@drawable/menu_custom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/menu_item"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
