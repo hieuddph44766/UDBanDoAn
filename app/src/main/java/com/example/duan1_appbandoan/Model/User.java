@@ -8,7 +8,6 @@ public class User {
     private String address;
     private String phone;
     private int role;
-
     // Constructor
     public User(int idUser, String userName, String password, String email, String address, String phone, int role) {
         this.idUser = idUser;

@@ -18,7 +18,6 @@ public class UserDAO {
     public UserDAO(Context context) {
         dbHelper = new Dbhelper(context);
     }
-
     // Thêm User
     public long insertUser(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -33,7 +32,6 @@ public class UserDAO {
         db.close();
         return result;
     }
-
     // Cập nhật User
     public int updateUser(User user) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -90,8 +88,8 @@ public class UserDAO {
             obj.setPassword(c.getString(c.getColumnIndex("password")));
             list.add(obj);
         }
-        c.close(); // Luôn đóng cursor
-        db.close(); // Đóng kết nối database
+        c.close();
+        db.close();
         return list;
     }
     public int checkLogin(String id, String password){
