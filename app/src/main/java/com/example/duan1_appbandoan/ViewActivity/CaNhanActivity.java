@@ -1,7 +1,6 @@
 package com.example.duan1_appbandoan.ViewActivity;
 
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;

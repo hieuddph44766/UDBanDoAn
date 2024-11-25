@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         strUser = edUserName.getText().toString();
         strPass = edPassword.getText().toString();
         if (strUser.isEmpty() || strPass.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Bạn Phải Nhập Tài Khoản Hoặc Mật Khẩu", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Bạn Phải Nhập Tài Khoản Hoặc Mật Khẩu.", Toast.LENGTH_SHORT).show();
         } else {
             if (Userdao.checkLogin(strUser, strPass) > 0) {
                 Toast.makeText(getApplicationContext(), "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             } else {
-                Toast.makeText(getApplicationContext(), "Sai Tài Khoản Hoặc Mật Khẩu", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Sai Tài Khoản Hoặc Mật Khẩu.", Toast.LENGTH_SHORT).show();
             }
         }
     }
