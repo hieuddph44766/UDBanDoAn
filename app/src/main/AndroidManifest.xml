@@ -13,6 +13,9 @@
         android:theme="@style/Theme.DUAN1_APPBANDOAN"
         tools:targetApi="31">
         <activity
+            android:name=".ViewActivity.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewActivity.RegisterActivity"
             android:exported="false" />
         <activity

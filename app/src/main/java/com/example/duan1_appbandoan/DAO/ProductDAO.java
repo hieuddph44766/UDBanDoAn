@@ -15,6 +15,7 @@ public class ProductDAO {
     private Dbhelper dbHelper;
 
     public ProductDAO(Context context) {
+
         dbHelper = new Dbhelper(context);
     }
 
@@ -68,11 +69,78 @@ public class ProductDAO {
                 product.setIdReview(cursor.getInt(cursor.getColumnIndexOrThrow("id_Review")));
                 product.setIdCategory(cursor.getInt(cursor.getColumnIndexOrThrow("id_Category")));
                 product.setTotalSale(cursor.getInt(cursor.getColumnIndexOrThrow("total_sale")));
+                product.setPrice(cursor.getInt(cursor.getColumnIndexOrThrow("price")));
                 productList.add(product);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
         return productList;
+    }
+    // Thêm sản phẩm vào giỏ hàng
+    public long addToCart(int orderId, int productId, int quantity, int price) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id_Order", orderId);
+        values.put("id_Product", productId);
+        values.put("quantity", quantity);
+        values.put("totalprice", quantity * price);
+        long result = db.insert("order_detail", null, values);
+        db.close();
+        return result;
+    }
+    // Lấy danh sách sản phẩm trong giỏ hàng
+    public List<Product> getCartItems(int orderId) {
+        List<Product> cartItems = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "SELECT p.id_product, p.name, p.description, p.id_Review, p.id_Category, p.total_sale, od.quantity, od.totalprice " +
+                        "FROM product p JOIN order_detail od ON p.id_product = od.id_Product " +
+                        "WHERE od.id_Order = ?",
+                new String[]{String.valueOf(orderId)}
+        );
+        if (cursor.moveToFirst()) {
+            do {
+                Product product = new Product();
+                product.setIdProduct(cursor.getInt(cursor.getColumnIndexOrThrow("id_product")));
+                product.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+                product.setDescription(cursor.getString(cursor.getColumnIndexOrThrow("description")));
+                product.setIdReview(cursor.getInt(cursor.getColumnIndexOrThrow("id_Review")));
+                product.setIdCategory(cursor.getInt(cursor.getColumnIndexOrThrow("id_Category")));
+                product.setTotalSale(cursor.getInt(cursor.getColumnIndexOrThrow("total_sale")));
+                // Lấy thông tin từ giỏ hàng
+                product.setQuantity(cursor.getInt(cursor.getColumnIndexOrThrow("quantity")));
+                cartItems.add(product);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return cartItems;
+    }
+    // Xóa sản phẩm khỏi giỏ hàng
+    public int removeFromCart(int orderId, int productId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int result = db.delete("order_detail", "id_Order = ? AND id_Product = ?",
+                new String[]{String.valueOf(orderId), String.valueOf(productId)});
+        db.close();
+        return result;
+    }
+    // Xóa toàn bộ sản phẩm trong giỏ hàng
+    public int clearCart(int orderId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int result = db.delete("order_detail", "id_Order = ?", new String[]{String.valueOf(orderId)});
+        db.close();
+        return result;
+    }
+    // Cập nhật số lượng sản phẩm trong giỏ hàng
+    public int updateCartItem(int orderId, int productId, int newQuantity, int price) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("quantity", newQuantity);
+        values.put("totalprice", newQuantity * price);
+        int result = db.update("order_detail", values, "id_Order = ? AND id_Product = ?",
+                new String[]{String.valueOf(orderId), String.valueOf(productId)});
+        db.close();
+        return result;
     }
 }

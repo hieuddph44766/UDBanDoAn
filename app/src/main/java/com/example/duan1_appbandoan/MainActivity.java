@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duan1_appbandoan.Adapter.ProductAdapter;
 import com.example.duan1_appbandoan.DAO.ProductDAO;
 import com.example.duan1_appbandoan.ViewActivity.CaNhanActivity;
+import com.example.duan1_appbandoan.ViewActivity.CartActivity;
 import com.example.duan1_appbandoan.ViewActivity.CategoryActivity;
 import com.example.duan1_appbandoan.ViewActivity.HoaDonActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -60,6 +61,10 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.menu_HoaDon) {
                     startActivity(new Intent(getApplicationContext(), HoaDonActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (item.getItemId() == R.id.menu_Cart) {
+                    startActivity(new Intent(getApplicationContext(), CartActivity.class));
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (item.getItemId() == R.id.menu_CaNhan) {

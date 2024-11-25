@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB_NAME="PNLIB";
-    private static final int DB_VERSION=1;
+    private static final int DB_VERSION=5;
 
     public Dbhelper(@Nullable Context context) {
         super(context,DB_NAME,null,DB_VERSION);
@@ -55,6 +55,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                   "    id_Review INTEGER NOT NULL,\n" +
                   "    id_Category INTEGER NOT NULL,\n" +
                   "    total_sale INTEGER NOT NULL,\n" +
+                  "    price INTEGER NOT NULL,\n" +  // Thêm giá sản phẩm
                   "    FOREIGN KEY (id_Review) REFERENCES review(id_Review),\n" +
                   "    FOREIGN KEY (id_Category) REFERENCES category(id_Category)\n" +
                   ")";
@@ -85,22 +86,18 @@ public class Dbhelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        String dropTableUser = "drop table if exists user";
-        db.execSQL(dropTableUser);
-        //
-        String dropTableProduct = "drop table if exists product";
-        db.execSQL(dropTableProduct);
-        //
-        String dropTableOrder = "drop table if exists order1";
-        db.execSQL(dropTableOrder);
-        //
-        String dropTableOrderDetail = "drop table if exists order_detail";
-        db.execSQL(dropTableOrderDetail);
-        String dropTableReview= "drop table if exists review";
-        db.execSQL(dropTableReview);
-        String dropTableCategory = "drop table if exists category";
-        db.execSQL(dropTableCategory);
-        //
-        onCreate(db);
+        if (i < i1) {
+            // Xóa các bảng cũ nếu cần thiết
+            db.execSQL("DROP TABLE IF EXISTS product");
+            db.execSQL("DROP TABLE IF EXISTS user");
+            db.execSQL("DROP TABLE IF EXISTS orders");
+            db.execSQL("DROP TABLE IF EXISTS order_detail");
+            db.execSQL("DROP TABLE IF EXISTS review");
+            db.execSQL("DROP TABLE IF EXISTS category");
+
+            // Tạo lại các bảng mới
+            onCreate(db);
+        }
     }
+
 }
