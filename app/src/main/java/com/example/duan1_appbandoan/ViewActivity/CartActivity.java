@@ -49,7 +49,7 @@ public class CartActivity extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CartActivity.this, "Checkout thành công!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CartActivity.this, "Đặt hàng", Toast.LENGTH_SHORT).show();
                 productDAO.clearCart(1);
                 finish();
             }

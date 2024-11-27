@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Ảnh sản phẩm -->
+    <ImageView
+        android:id="@+id/imgProductDetail"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_cart" />
+
+    <!-- Tên sản phẩm -->
+    <TextView
+        android:id="@+id/tvProductNameDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tên sản phẩm"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
+    <!-- Mô tả sản phẩm -->
+    <TextView
+        android:id="@+id/tvProductDescriptionDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mô tả sản phẩm"
+        android:layout_marginTop="8dp" />
+
+    <!-- Giá sản phẩm -->
+    <TextView
+        android:id="@+id/tvProductPriceDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Giá: 0 VND"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp" />
+
+    <!-- Nút thêm vào giỏ hàng -->
+    <Button
+        android:id="@+id/btnAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/design_default_color_primary"
+        android:text="Thêm vào giỏ hàng"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+</LinearLayout>

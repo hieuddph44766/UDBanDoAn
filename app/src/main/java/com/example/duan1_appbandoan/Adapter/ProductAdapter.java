@@ -1,6 +1,7 @@
 package com.example.duan1_appbandoan.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_appbandoan.Model.Product;
 import com.example.duan1_appbandoan.R;
+import com.example.duan1_appbandoan.ViewActivity.ProductDetailActivity;
 
 import java.util.List;
 
@@ -37,6 +39,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productName.setText(product.getName());
         holder.productDescription.setText(product.getDescription());
         holder.productTotalSale.setText("Total Sale: " + product.getTotalSale());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("product", product);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

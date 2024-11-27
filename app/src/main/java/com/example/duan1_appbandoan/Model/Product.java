@@ -1,6 +1,8 @@
 package com.example.duan1_appbandoan.Model;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int idProduct;
     private String name;
     private String description;
@@ -9,11 +11,12 @@ public class Product {
     private int totalSale;
     private int price;
     private int quantity;
+    private String imageUrl;
 
     public Product() {
     }
 
-    public Product(int idProduct, String name, String description, int idReview, int idCategory, int totalSale, int price, int quantity) {
+    public Product(int idProduct, String name, String description, int idReview, int idCategory, int totalSale, int price, int quantity, String imageUrl) {
         this.idProduct = idProduct;
         this.name = name;
         this.description = description;
@@ -22,6 +25,7 @@ public class Product {
         this.totalSale = totalSale;
         this.price = price;
         this.quantity = quantity;
+        this.imageUrl = imageUrl;
     }
 
     public int getIdProduct() {
@@ -86,5 +90,13 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
