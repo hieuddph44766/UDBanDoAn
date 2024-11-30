@@ -3,7 +3,7 @@ package com.example.duan1_appbandoan.DataBase;
 public class Data_SQLite {
     public static final String INSERT_USER = "insert into user(userName,password,email,address,phone,role) values" +
             "('huy', 'huy', 'huy11@gmaiil.com','CB','1234567890',0)," +
-            "('hieu', 'hieu12345', 'hieudd@gmaiil.com','HN','1234567890',0)";
+            "('hieu', 'hieu12345', 'hieudd@gmaiil.com','HN','1234567890',0),";
 
     public static final String INSERT_PRODUCT =
             "INSERT INTO product(name, description, total_sale, id_Review, id_Category, image, price) VALUES " +
