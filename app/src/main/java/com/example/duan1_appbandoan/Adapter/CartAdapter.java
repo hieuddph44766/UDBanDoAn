@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,11 +24,18 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private List<Product> cartItems;
     private Context context;
     private ProductDAO productDAO;
+    private UpdateTotalPriceListener updateTotalPriceListener; // Interface để callback
 
+    // Constructor
     public CartAdapter(List<Product> cartItems, Context context, ProductDAO productDAO) {
         this.cartItems = cartItems;
         this.context = context;
         this.productDAO = productDAO;
+    }
+
+    // Đăng ký callback
+    public void setUpdateTotalPriceListener(UpdateTotalPriceListener listener) {
+        this.updateTotalPriceListener = listener;
     }
 
     @NonNull
@@ -43,38 +49,42 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         Product product = cartItems.get(position);
         holder.tvProductName.setText(product.getName());
-        holder.tvQuantity.setText("Số : " + product.getQuantity());
-        holder.tvPrice.setText("VND" + product.getPrice());
+        holder.tvQuantity.setText("Số lượng: " + product.getQuantity());
+        holder.tvPrice.setText("VND " + product.getTotalSale());
 
-        // Tải ảnh từ URL hoặc từ resource
+
         Glide.with(context)
-                .load(product.getImageUrl())  // Tải ảnh từ URL hoặc từ resource
-                .placeholder(R.drawable.ic_cart)  // Ảnh mặc định khi chưa tải
-                .error(R.drawable.ic_lock)  // Ảnh lỗi nếu có sự cố khi tải
+                .load(product.getImageUrl())
+                .placeholder(R.drawable.ic_cart)
+                .error(R.drawable.ic_lock)
                 .into(holder.imgProduct);
 
-        // Xử lý sự kiện tăng số lượng
+        // Tăng số lượng
         holder.btnIncrease.setOnClickListener(v -> {
             int newQuantity = product.getQuantity() + 1;
             product.setQuantity(newQuantity);
             productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getPrice());
             notifyItemChanged(position);
+            if (updateTotalPriceListener != null) {
+                updateTotalPriceListener.onUpdateTotalPrice(); // Cập nhật lại tổng giá
+            }
         });
 
-        // Xử lý sự kiện giảm số lượng
+        // Giảm số lượng
         holder.btnDecrease.setOnClickListener(v -> {
             if (product.getQuantity() > 1) {
                 int newQuantity = product.getQuantity() - 1;
                 product.setQuantity(newQuantity);
                 productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getPrice());
                 notifyItemChanged(position);
+                if (updateTotalPriceListener != null) {
+                    updateTotalPriceListener.onUpdateTotalPrice(); // Cập nhật lại tổng giá
+                }
             }
         });
 
-        // Xử lý sự kiện xóa sản phẩm
-
+        // Xóa sản phẩm
         holder.btnDelete.setOnClickListener(v -> {
-            // Tạo một AlertDialog để xác nhận hành động xoá
             new AlertDialog.Builder(context)
                     .setTitle("Xác nhận")
                     .setMessage("Bạn có chắc chắn muốn xoá sản phẩm này khỏi giỏ hàng?")
@@ -82,16 +92,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                         productDAO.removeFromCart(1, product.getIdProduct());
                         cartItems.remove(position);
                         notifyItemRemoved(position);
-                        //updateTotalPrice(cartItems);  // Cập nhật lại tổng giá trị giỏ hàng
+                        if (updateTotalPriceListener != null) {
+                            updateTotalPriceListener.onUpdateTotalPrice(); // Cập nhật lại tổng giá
+                        }
                         Toast.makeText(context, "Sản phẩm đã được xoá", Toast.LENGTH_SHORT).show();
                     })
                     .setNegativeButton("Hủy", null)
                     .show();
         });
-
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -99,9 +108,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView tvProductName, tvQuantity, tvPrice;
+        TextView tvProductName, tvQuantity, tvPrice, tvTotalPrice;
         ImageButton btnDecrease, btnIncrease, btnDelete;
         ImageView imgProduct;
+
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             tvProductName = itemView.findViewById(R.id.tvProductName);
@@ -111,8 +121,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnIncrease = itemView.findViewById(R.id.btnIncrease);
             btnDecrease = itemView.findViewById(R.id.btnDecrease);
             btnDelete = itemView.findViewById(R.id.btnDelete);
-
-            
         }
+    }
+
+    // Interface callback
+    public interface UpdateTotalPriceListener {
+        void onUpdateTotalPrice();
     }
 }

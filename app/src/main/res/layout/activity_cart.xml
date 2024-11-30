@@ -22,7 +22,7 @@
         android:gravity="center"
         android:textSize="18sp"
         android:padding="8dp"
-        android:text="Total: $0" />
+        android:text="Total: 0 VND" />
 
     <Button
         android:id="@+id/btnCheckout"

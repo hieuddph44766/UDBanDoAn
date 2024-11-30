@@ -1,5 +1,6 @@
 package com.example.duan1_appbandoan.ViewActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import com.example.duan1_appbandoan.DAO.ProductDAO;
 import com.example.duan1_appbandoan.Model.Product;
 import com.example.duan1_appbandoan.R;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
@@ -49,18 +51,49 @@ public class CartActivity extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CartActivity.this, "Đặt hàng", Toast.LENGTH_SHORT).show();
-                productDAO.clearCart(1);
-                finish();
+                // Lấy danh sách sản phẩm trong giỏ hàng từ database hoặc bộ nhớ
+                List<Product> cartItems = productDAO.getCartItems(1); // Giả sử ID của đơn hàng là 1
+
+                // Kiểm tra nếu giỏ hàng không rỗng
+                if (cartItems != null && !cartItems.isEmpty()) {
+                    // Tạo Intent để chuyển đến HoaDonActivity
+                    Intent intent = new Intent(CartActivity.this, HoaDonActivity.class);
+
+                    // Gửi dữ liệu qua Bundle
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("cartItems", (Serializable) cartItems);
+                    intent.putExtras(bundle);
+
+                    // Mở HoaDonActivity
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CartActivity.this, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
+
+
+
+        cartAdapter.setUpdateTotalPriceListener(new CartAdapter.UpdateTotalPriceListener() {
+            @Override
+            public void onUpdateTotalPrice() {
+                updateTotalPrice(cartItems);
+            }
+        });
+
+
     }
+    // Trong CartActivity
     private void updateTotalPrice(List<Product> cartItems) {
-        int totalPrice = 0;
-        for (Product item : cartItems) {
-            totalPrice += item.getPrice() * item.getQuantity();
+        double total = 0;
+        // Tính tổng giá trị giỏ hàng
+        for (Product product : cartItems) {
+            total += product.getTotalSale() * product.getQuantity(); // Tính giá trị dựa trên giá và số lượng
         }
-        tvTotalPrice.setText("Total: $" + totalPrice);
+        TextView tvTotalPrice = findViewById(R.id.tvTotalPrice); // Đảm bảo bạn có TextView này trong layout
+        tvTotalPrice.setText("Total: VND" + total);
     }
+
+
 }

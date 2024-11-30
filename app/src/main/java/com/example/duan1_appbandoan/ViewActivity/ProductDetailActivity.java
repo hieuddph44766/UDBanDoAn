@@ -42,7 +42,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             // Gán dữ liệu vào các view
             tvProductNameDetail.setText(product.getName());
             tvProductDescriptionDetail.setText(product.getDescription());
-            tvProductPriceDetail.setText("Giá: " + product.getPrice() + " VND");
+            tvProductPriceDetail.setText("Giá: " + product.getTotalSale() + " VND");
             // Nếu có ảnh, bạn có thể load qua Glide hoặc Picasso
         }
 

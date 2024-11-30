@@ -78,7 +78,6 @@
             android:id="@+id/btnDelete"
             android:layout_width="20dp"
             android:layout_height="20dp"
-
             android:contentDescription="Delete Item"
             android:background="@drawable/ic_delete" />
     </LinearLayout>
