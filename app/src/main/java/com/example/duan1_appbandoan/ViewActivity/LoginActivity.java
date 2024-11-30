@@ -19,9 +19,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.duan1_appbandoan.AdminActivity;
 import com.example.duan1_appbandoan.DAO.UserDAO;
 import com.example.duan1_appbandoan.MainActivity;
 import com.example.duan1_appbandoan.R;
+
 import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Ánh xạ view
         edUserName = findViewById(R.id.edt_user);
         edPassword = findViewById(R.id.edt_pass);
         btnLogin = findViewById(R.id.btn_login);
@@ -48,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         chkRememberPass = findViewById(R.id.ckb_loginRemember);
         Userdao = new UserDAO(this);
 
+        // Lấy thông tin lưu trữ từ SharedPreferences
         SharedPreferences pref = getSharedPreferences(USER_FILE, MODE_PRIVATE);
         String user = pref.getString(USERNAME, "");
         String pass = pref.getString(PASSWORD, "");
@@ -57,19 +62,13 @@ public class LoginActivity extends AppCompatActivity {
         edPassword.setText(pass);
         chkRememberPass.setChecked(rem);
 
-        btnDangky.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        // Xử lý sự kiện
+        btnDangky.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
         });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkLogin();
-            }
-        });
+
+        btnLogin.setOnClickListener(v -> checkLogin());
     }
 
     public void rememberUser(String u, String p, boolean status) {
@@ -82,25 +81,36 @@ public class LoginActivity extends AppCompatActivity {
             edit.putString(PASSWORD, p);
             edit.putBoolean(REMEMBER, status);
         }
-        edit.commit();
+        edit.apply();
     }
 
     public void checkLogin() {
         strUser = edUserName.getText().toString();
         strPass = edPassword.getText().toString();
+
         if (strUser.isEmpty() || strPass.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Bạn Phải Nhập Tài Khoản Hoặc Mật Khẩu.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Bạn phải nhập tài khoản hoặc mật khẩu.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Kiểm tra đăng nhập
+        int role = Userdao.checkLogin(strUser, strPass);
+        if (role == -1) {
+            Toast.makeText(getApplicationContext(), "Sai tài khoản hoặc mật khẩu.", Toast.LENGTH_SHORT).show();
         } else {
-            if (Userdao.checkLogin(strUser, strPass) > 0) {
-                Toast.makeText(getApplicationContext(), "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
-                rememberUser(strUser, strPass, chkRememberPass.isChecked());
-                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                i.putExtra("user", strUser);
-                startActivity(i);
-                finish();
+            Toast.makeText(getApplicationContext(), "Đăng nhập thành công.", Toast.LENGTH_SHORT).show();
+            rememberUser(strUser, strPass, chkRememberPass.isChecked());
+
+            // Chuyển đến Activity tương ứng
+            Intent intent;
+            if (role == 0) {
+                intent = new Intent(getApplicationContext(), AdminActivity.class); // Dành cho admin
             } else {
-                Toast.makeText(getApplicationContext(), "Sai Tài Khoản Hoặc Mật Khẩu.", Toast.LENGTH_SHORT).show();
+                intent = new Intent(getApplicationContext(), MainActivity.class); // Dành cho user
             }
+            intent.putExtra("user", strUser);
+            startActivity(intent);
+            finish();
         }
     }
 }

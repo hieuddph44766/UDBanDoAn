@@ -13,6 +13,9 @@ import com.example.duan1_appbandoan.Model.Product;
 import com.example.duan1_appbandoan.R;
 import com.example.duan1_appbandoan.DAO.ProductDAO;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class ProductDetailActivity extends AppCompatActivity {
     private ImageView imgProductDetail;
     private TextView tvProductNameDetail, tvProductDescriptionDetail, tvProductPriceDetail;
@@ -42,9 +45,17 @@ public class ProductDetailActivity extends AppCompatActivity {
             // Gán dữ liệu vào các view
             tvProductNameDetail.setText(product.getName());
             tvProductDescriptionDetail.setText(product.getDescription());
-            tvProductPriceDetail.setText("Giá: " + product.getTotalSale() + " VND");
+            NumberFormat formatter = NumberFormat.getInstance(Locale.getDefault());
+            tvProductPriceDetail.setText("Giá: " + formatter.format(product.getPrice()) + " VND");
             // Nếu có ảnh, bạn có thể load qua Glide hoặc Picasso
         }
+
+        if (product.getImageResId() != 0) {
+            imgProductDetail.setImageResource(product.getImageResId());
+        } else {
+            imgProductDetail.setImageResource(R.drawable.ic_launcher_background); // Ảnh mặc định nếu không có
+        }
+
 
         // Thêm sản phẩm vào giỏ hàng khi nhấn nút
         btnAddToCart.setOnClickListener(view -> {
@@ -57,6 +68,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             if (result > 0) {
                 Toast.makeText(ProductDetailActivity.this, "Đã thêm sản phẩm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(ProductDetailActivity.this, CartActivity.class));
             } else {
                 Toast.makeText(ProductDetailActivity.this, "Lỗi khi thêm vào giỏ hàng.", Toast.LENGTH_SHORT).show();
             }

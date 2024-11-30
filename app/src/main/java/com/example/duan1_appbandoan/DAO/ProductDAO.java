@@ -13,24 +13,33 @@ import java.util.List;
 
 public class ProductDAO {
     private Dbhelper dbHelper;
+    private Context context;
 
     public ProductDAO(Context context) {
-
+        this.context = context;
         dbHelper = new Dbhelper(context);
     }
 
     // Thêm Product
-    public long insertProduct(Product product) {
+    public boolean insertProduct(Product product) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", product.getName());
         values.put("description", product.getDescription());
-        values.put("id_Review", product.getIdReview());
+        values.put("price", product.getPrice());
         values.put("id_Category", product.getIdCategory());
-        values.put("total_sale", product.getTotalSale());
+
+        // Kiểm tra và gán giá trị mặc định cho id_Review nếu không có giá trị
+        if (product.getIdReview() == null) {
+            values.put("id_Review", -1);  // Gán giá trị mặc định, chẳng hạn là -1
+        } else {
+            values.put("id_Review", product.getIdReview());
+        }
+        values.put("total_sale", 0);
+        values.put("image", "");
         long result = db.insert("product", null, values);
         db.close();
-        return result;
+        return result != -1; // Trả về true nếu thêm thành công
     }
 
     // Cập nhật Product
@@ -39,9 +48,15 @@ public class ProductDAO {
         ContentValues values = new ContentValues();
         values.put("name", product.getName());
         values.put("description", product.getDescription());
-        values.put("id_Review", product.getIdReview());
+        if (product.getIdReview() == null) {
+            values.put("id_Review", -1);  // Gán giá trị mặc định, chẳng hạn là -1
+        } else {
+            values.put("id_Review", product.getIdReview());
+        }
         values.put("id_Category", product.getIdCategory());
-        values.put("total_sale", product.getTotalSale());
+        values.put("total_sale", "");
+        values.put("image", "");
+        values.put("price", product.getPrice());
         int result = db.update("product", values, "id_product=?", new String[]{String.valueOf(product.getIdProduct())});
         db.close();
         return result;
@@ -70,6 +85,9 @@ public class ProductDAO {
                 product.setIdCategory(cursor.getInt(cursor.getColumnIndexOrThrow("id_Category")));
                 product.setTotalSale(cursor.getInt(cursor.getColumnIndexOrThrow("total_sale")));
                 product.setPrice(cursor.getInt(cursor.getColumnIndexOrThrow("price")));
+                String imageName = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+                int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+                product.setImageResId(imageResId);
                 productList.add(product);
             } while (cursor.moveToNext());
         }
@@ -77,6 +95,7 @@ public class ProductDAO {
         db.close();
         return productList;
     }
+
     // Thêm sản phẩm vào giỏ hàng
     public long addToCart(int orderId, int productId, int quantity, int price) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -89,12 +108,13 @@ public class ProductDAO {
         db.close();
         return result;
     }
+
     // Lấy danh sách sản phẩm trong giỏ hàng
     public List<Product> getCartItems(int orderId) {
         List<Product> cartItems = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT p.id_product, p.name, p.description, p.id_Review, p.id_Category, p.total_sale, od.quantity, od.totalprice " +
+                "SELECT p.id_product, p.name, p.description, p.id_Review, p.id_Category, p.total_sale, p.price, od.quantity, od.totalprice " +
                         "FROM product p JOIN order_detail od ON p.id_product = od.id_Product " +
                         "WHERE od.id_Order = ?",
                 new String[]{String.valueOf(orderId)}
@@ -108,7 +128,7 @@ public class ProductDAO {
                 product.setIdReview(cursor.getInt(cursor.getColumnIndexOrThrow("id_Review")));
                 product.setIdCategory(cursor.getInt(cursor.getColumnIndexOrThrow("id_Category")));
                 product.setTotalSale(cursor.getInt(cursor.getColumnIndexOrThrow("total_sale")));
-                // Lấy thông tin từ giỏ hàng
+                product.setPrice(cursor.getInt(cursor.getColumnIndexOrThrow("price")));
                 product.setQuantity(cursor.getInt(cursor.getColumnIndexOrThrow("quantity")));
                 cartItems.add(product);
             } while (cursor.moveToNext());
@@ -117,6 +137,7 @@ public class ProductDAO {
         db.close();
         return cartItems;
     }
+
     // Xóa sản phẩm khỏi giỏ hàng
     public int removeFromCart(int orderId, int productId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -125,6 +146,7 @@ public class ProductDAO {
         db.close();
         return result;
     }
+
     // Xóa toàn bộ sản phẩm trong giỏ hàng
     public int clearCart(int orderId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -132,6 +154,7 @@ public class ProductDAO {
         db.close();
         return result;
     }
+
     // Cập nhật số lượng sản phẩm trong giỏ hàng
     public int updateCartItem(int orderId, int productId, int newQuantity, int price) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();

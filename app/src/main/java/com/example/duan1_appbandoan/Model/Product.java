@@ -6,17 +6,21 @@ public class Product implements Serializable {
     private int idProduct;
     private String name;
     private String description;
-    private int idReview;
+    private Integer idReview;
     private int idCategory;
     private int totalSale;
     private int price;
     private int quantity;
-    private String imageUrl;
+    private String imageUrl; // Tên file ảnh (dạng String, ví dụ: "banh_mi_pate")
+    private int imageResId;  // ID của ảnh trong drawable (dạng int)
 
+    // Constructor không tham số
     public Product() {
     }
 
-    public Product(int idProduct, String name, String description, int idReview, int idCategory, int totalSale, int price, int quantity, String imageUrl) {
+    // Constructor đầy đủ tham số
+    public Product(int idProduct, String name, String description, Integer idReview, int idCategory,
+                   int totalSale, int price, int quantity, String imageUrl, int imageResId) {
         this.idProduct = idProduct;
         this.name = name;
         this.description = description;
@@ -26,7 +30,18 @@ public class Product implements Serializable {
         this.price = price;
         this.quantity = quantity;
         this.imageUrl = imageUrl;
+        this.imageResId = imageResId;
     }
+
+    public Product(String name, String description, int idCategory, int price, int imageResId) {
+        this.name = name;
+        this.description = description;
+        this.idCategory = idCategory;
+        this.price = price;
+        this.imageResId = imageResId;
+    }
+
+    // Getters và Setters cho các thuộc tính
 
     public int getIdProduct() {
         return idProduct;
@@ -52,11 +67,11 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public int getIdReview() {
+    public Integer getIdReview() {
         return idReview;
     }
 
-    public void setIdReview(int idReview) {
+    public void setIdReview(Integer idReview) {
         this.idReview = idReview;
     }
 
@@ -98,5 +113,13 @@ public class Product implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getImageResId() {
+        return imageResId;
+    }
+
+    public void setImageResId(int imageResId) {
+        this.imageResId = imageResId;
     }
 }

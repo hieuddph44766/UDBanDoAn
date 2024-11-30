@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_marginTop="10dp"
+    >
 
     <!-- Ảnh sản phẩm -->
     <ImageView
@@ -21,7 +22,8 @@
         android:text="Tên sản phẩm"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:padding="10dp"/>
 
     <!-- Mô tả sản phẩm -->
     <TextView
@@ -29,7 +31,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mô tả sản phẩm"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:padding="10dp"/>
 
     <!-- Giá sản phẩm -->
     <TextView
@@ -38,7 +41,8 @@
         android:layout_height="wrap_content"
         android:text="Giá: 0 VND"
         android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:padding="10dp"/>
 
     <!-- Nút thêm vào giỏ hàng -->
     <Button
@@ -46,8 +50,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="@color/design_default_color_primary"
+        android:backgroundTint="#ff5e00"
         android:text="Thêm vào giỏ hàng"
         android:textColor="@android:color/white"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        />
 </LinearLayout>

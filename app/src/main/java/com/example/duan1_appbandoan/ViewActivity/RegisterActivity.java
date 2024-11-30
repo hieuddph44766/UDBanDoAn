@@ -47,15 +47,15 @@ public class RegisterActivity extends AppCompatActivity {
             String pass=edt_Password.getText().toString();
             String rePass=edt_rePassword.getText().toString();
             if(!pass.equals(rePass)){
-                Toast.makeText(RegisterActivity.this, "Nhap 2 mat khau khong trung nhau", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Nhập lại mật khẩu sai", Toast.LENGTH_SHORT).show();
             }else{
                 long check=Userdao.insertUser(new User(user,pass));
                 if (check >0){
-                    Toast.makeText(RegisterActivity.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                     finish();
                 }else{
-                    Toast.makeText(RegisterActivity.this, "Dang ky that bai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
                 }
             }
         }

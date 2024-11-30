@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB_NAME="PNLIB";
-    private static final int DB_VERSION=6;
+    private static final int DB_VERSION=8;
 
     public Dbhelper(@Nullable Context context) {
         super(context,DB_NAME,null,DB_VERSION);
@@ -55,6 +55,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                   "    id_Review INTEGER NOT NULL,\n" +
                   "    id_Category INTEGER NOT NULL,\n" +
                   "    total_sale INTEGER NOT NULL,\n" +
+                  "    image TEXT NOT NULL,\n" +
                   "    price INTEGER NOT NULL,\n" +  // Thêm giá sản phẩm
                   "    FOREIGN KEY (id_Review) REFERENCES review(id_Review),\n" +
                   "    FOREIGN KEY (id_Category) REFERENCES category(id_Category)\n" +
