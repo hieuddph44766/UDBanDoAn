@@ -17,12 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.duan1_appbandoan.Adapter.ProductAdapter;
 import com.example.duan1_appbandoan.DAO.ProductDAO;
+import com.example.duan1_appbandoan.Model.Product;
 import com.example.duan1_appbandoan.ViewActivity.CaNhanActivity;
 import com.example.duan1_appbandoan.ViewActivity.CartActivity;
 import com.example.duan1_appbandoan.ViewActivity.CategoryActivity;
 import com.example.duan1_appbandoan.ViewActivity.HoaDonActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ProductDAO productDAO;
@@ -31,9 +34,8 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottom_NaView;
     String user;
     TextView tv_User;
-    SearchView searchView;
+    private SearchView searchView;
     @SuppressLint("NonConstantResourceId")
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
