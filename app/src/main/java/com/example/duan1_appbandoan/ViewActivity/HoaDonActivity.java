@@ -37,7 +37,7 @@ public class HoaDonActivity extends AppCompatActivity {
             // Tính tổng tiền và hiển thị
             double total = 0;
             for (Product product : cartItems) {
-                total += product.getPrice() * product.getQuantity();  // Tính tổng tiền
+                total += product.getTotalSale() * product.getQuantity();  // Tính tổng tiền
             }
             TextView tvTotal = findViewById(R.id.tvTotalPrice);
             tvTotal.setText("Tổng tiền: VND " + total);

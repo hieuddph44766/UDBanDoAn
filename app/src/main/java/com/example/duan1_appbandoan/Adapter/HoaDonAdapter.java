@@ -35,8 +35,8 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         Product product = productList.get(position);
         holder.tvProductName.setText(product.getName());
         holder.tvProductQuantity.setText("Số lượng: " + product.getQuantity());
-        holder.tvHDPrice.setText("VND " + product.getPrice());
-        holder.tvTotalPrice.setText("Tổng: VND " + (product.getPrice() * product.getQuantity()));
+        holder.tvHDPrice.setText("VND " + product.getTotalSale());
+        holder.tvTotalPrice.setText("Tổng: VND " + (product.getTotalSale() * product.getQuantity()));
         holder.tvOrderDate.setText("Ngày đặt: " + product.getOderDate());
     }
 

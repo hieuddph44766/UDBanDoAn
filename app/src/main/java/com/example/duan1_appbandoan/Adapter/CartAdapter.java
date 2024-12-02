@@ -96,6 +96,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     .setNegativeButton("Hủy", null)
                     .show();
         });
+
+        Glide.with(context)
+                .load(product.getImageResId())
+                .error(R.drawable.img_buncha)
+                .into(holder.imgProduct);
     }
 
     @Override

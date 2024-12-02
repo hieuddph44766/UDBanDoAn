@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:backgroundTint="#F29E84"
+    android:backgroundTint="#DCBDB3"
     card_view:cardCornerRadius="12dp"
     card_view:cardElevation="4dp">
 
@@ -14,22 +14,21 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <!-- Ảnh sản phẩm -->
         <ImageView
             android:id="@+id/imgProduct"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:scaleType="centerCrop"
             android:layout_marginEnd="8dp" />
 
-        <!-- Thông tin sản phẩm -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <!-- Tên sản phẩm -->
+
             <TextView
                 android:id="@+id/tvProductName"
                 android:layout_width="wrap_content"
@@ -39,16 +38,16 @@
                 android:textSize="16sp"
                 android:textColor="@color/black" />
 
-            <!-- Số lượng -->
+
             <TextView
                 android:id="@+id/tvProductQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Số lượng: 1"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/black" />
 
-            <!-- Giá tiền -->
+
             <TextView
                 android:id="@+id/tvHDPrice"
                 android:layout_width="wrap_content"
@@ -67,13 +66,13 @@
                 android:textStyle="bold"
                 android:textColor="@color/black" />
 
-            <!-- Ngày đặt -->
+
             <TextView
                 android:id="@+id/tvOrderDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ngày đặt: 02/12/2024"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textColor="@color/black" />
         </LinearLayout>
 

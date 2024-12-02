@@ -22,7 +22,10 @@ import com.example.duan1_appbandoan.Model.Product;
 import com.example.duan1_appbandoan.R;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class CartActivity extends AppCompatActivity {
     private RecyclerView rvCart;
@@ -42,7 +45,7 @@ public class CartActivity extends AppCompatActivity {
 
         productDAO = new ProductDAO(this);
 
-        List<Product> cartItems = productDAO.getCartItems(1); // Thay 1 bằng ID order hiện tại
+        List<Product> cartItems = productDAO.getCartItems(1);
         cartAdapter = new CartAdapter(cartItems, this, productDAO);
         rvCart.setLayoutManager(new LinearLayoutManager(this));
         rvCart.setAdapter(cartAdapter);
@@ -51,20 +54,28 @@ public class CartActivity extends AppCompatActivity {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Lấy danh sách sản phẩm trong giỏ hàng từ database hoặc bộ nhớ
-                List<Product> cartItems = productDAO.getCartItems(1); // Giả sử ID của đơn hàng là 1
 
-                // Kiểm tra nếu giỏ hàng không rỗng
+                List<Product> cartItems = productDAO.getCartItems(1);
+
+
                 if (cartItems != null && !cartItems.isEmpty()) {
-                    // Tạo Intent để chuyển đến HoaDonActivity
+
+                    String currentDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(new Date());
+
+
+                    for (Product product : cartItems) {
+                        product.setOderDate(currentDate);
+                    }
+
+
                     Intent intent = new Intent(CartActivity.this, HoaDonActivity.class);
 
-                    // Gửi dữ liệu qua Bundle
+
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("cartItems", (Serializable) cartItems);
                     intent.putExtras(bundle);
 
-                    // Mở HoaDonActivity
+
                     startActivity(intent);
                 } else {
                     Toast.makeText(CartActivity.this, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
@@ -84,14 +95,14 @@ public class CartActivity extends AppCompatActivity {
 
 
     }
-    // Trong CartActivity
+
     private void updateTotalPrice(List<Product> cartItems) {
         double total = 0;
-        // Tính tổng giá trị giỏ hàng
+
         for (Product product : cartItems) {
-            total += product.getTotalSale() * product.getQuantity(); // Tính giá trị dựa trên giá và số lượng
+            total += product.getTotalSale() * product.getQuantity();
         }
-        TextView tvTotalPrice = findViewById(R.id.tvTotalPrice); // Đảm bảo bạn có TextView này trong layout
+        TextView tvTotalPrice = findViewById(R.id.tvTotalPrice);
         tvTotalPrice.setText("Total: VND" + total);
     }
 
