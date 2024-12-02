@@ -73,7 +73,7 @@ public class ProductDAO {
 
     // Lấy danh sách tất cả Product
     public List<Product> getAllProducts() {
-        List<Product> productList = new ArrayList<>();
+        List<Product> filteredProductList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM product", null);
         if (cursor.moveToFirst()) {
@@ -89,12 +89,12 @@ public class ProductDAO {
                 String imageName = cursor.getString(cursor.getColumnIndexOrThrow("image"));
                 int imageResId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
                 product.setImageResId(imageResId);
-                productList.add(product);
+                filteredProductList.add(product);
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return productList;
+        return filteredProductList;
     }
 
     // Thêm sản phẩm vào giỏ hàng

@@ -30,7 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
-        this.filteredProductList = new ArrayList(productList);
+        this.filteredProductList = new ArrayList<>(productList);
     }
     public Filter getFilter() {
         return new Filter() {
@@ -41,9 +41,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     filteredProductList = productList;
                 } else {
                     List<Product> filteredList = new ArrayList<>();
-                    for (Product name : productList) {
-                        if (name.getName().toLowerCase().contains(charSequenceString.toLowerCase())) {
-                            filteredList.add(name);
+                    for (Product product : productList) {
+                        if (product.getName().toLowerCase().contains(charSequenceString.toLowerCase())) {
+                            filteredList.add(product);
                         }
                         filteredProductList = filteredList;
                     }
@@ -59,7 +59,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             }
         };
     }
-
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -68,7 +67,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Product product = productList.get(position);
+        Product product = filteredProductList.get(position);
 
         holder.productName.setText(product.getName());
         holder.productDescription.setText(product.getDescription());
@@ -89,7 +88,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
     @Override
     public int getItemCount() {
-        return productList.size();
+        return filteredProductList.size();
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
