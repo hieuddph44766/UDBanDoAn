@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,16 +16,47 @@ import com.example.duan1_appbandoan.Model.Product;
 import com.example.duan1_appbandoan.R;
 import com.example.duan1_appbandoan.ViewActivity.ProductDetailActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private List<Product> productList;
+    private List<Product> filteredProductList;
+
     private Context context;
 
     public ProductAdapter(Context context, List<Product> productList) {
         this.context = context;
         this.productList = productList;
+        this.filteredProductList = new ArrayList(productList);
+    }
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String charSequenceString = constraint.toString();
+                if (charSequenceString.isEmpty()) {
+                    filteredProductList = productList;
+                } else {
+                    List<Product> filteredList = new ArrayList<>();
+                    for (Product name : productList) {
+                        if (name.getName().toLowerCase().contains(charSequenceString.toLowerCase())) {
+                            filteredList.add(name);
+                        }
+                        filteredProductList = filteredList;
+                    }
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredProductList;
+                return results;
+            }
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredProductList = (List<Product>) results.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     @NonNull
