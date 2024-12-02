@@ -37,6 +37,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         holder.tvProductQuantity.setText("Số lượng: " + product.getQuantity());
         holder.tvHDPrice.setText("VND " + product.getPrice());
         holder.tvTotalPrice.setText("Tổng: VND " + (product.getPrice() * product.getQuantity()));
+        holder.tvOrderDate.setText("Ngày đặt: " + product.getOderDate());
     }
 
     @Override
@@ -45,7 +46,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
     }
 
     public static class HoaDonViewHolder extends RecyclerView.ViewHolder {
-        TextView tvProductName, tvProductQuantity, tvHDPrice, tvTotalPrice;
+        TextView tvProductName, tvProductQuantity, tvHDPrice, tvTotalPrice, tvOrderDate;
 
         public HoaDonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -53,6 +54,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
             tvProductQuantity = itemView.findViewById(R.id.tvProductQuantity);
             tvHDPrice = itemView.findViewById(R.id.tvHDPrice);
             tvTotalPrice = itemView.findViewById(R.id.tvTotalHDPrice);
+            tvOrderDate = itemView.findViewById(R.id.tvOrderDate);
         }
     }
 }

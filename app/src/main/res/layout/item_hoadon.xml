@@ -1,65 +1,82 @@
-<!-- item_hoadon.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="@color/design_default_color_background"
-    android:layout_marginBottom="8dp">
+    android:layout_margin="8dp"
+    android:backgroundTint="#F29E84"
+    card_view:cardCornerRadius="12dp"
+    card_view:cardElevation="4dp">
 
-    <!-- Ảnh sản phẩm -->
-    <ImageView
-        android:id="@+id/imgProduct"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:scaleType="centerCrop"
-        android:layout_marginEnd="8dp" />
-
-    <!-- Thông tin sản phẩm -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <!-- Tên sản phẩm -->
-        <TextView
-            android:id="@+id/tvProductName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tên sản phẩm"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="@color/black" />
+        <!-- Ảnh sản phẩm -->
+        <ImageView
+            android:id="@+id/imgProduct"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
+            android:layout_marginEnd="8dp" />
 
-        <!-- Số lượng -->
-        <TextView
-            android:id="@+id/tvProductQuantity"
-            android:layout_width="wrap_content"
+        <!-- Thông tin sản phẩm -->
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Số lượng: 1"
-            android:textSize="14sp"
-            android:textColor="@color/black" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <!-- Giá tiền -->
-        <TextView
-            android:id="@+id/tvHDPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VND 100,000"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+            <!-- Tên sản phẩm -->
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên sản phẩm"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
 
-        <TextView
-            android:id="@+id/tvTotalHDPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tổng:  100,000 VND"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:textColor="@color/black" />
+            <!-- Số lượng -->
+            <TextView
+                android:id="@+id/tvProductQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng: 1"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+
+            <!-- Giá tiền -->
+            <TextView
+                android:id="@+id/tvHDPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VND 100,000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tvTotalHDPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tổng:  100,000 VND"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/black" />
+
+            <!-- Ngày đặt -->
+            <TextView
+                android:id="@+id/tvOrderDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ngày đặt: 02/12/2024"
+                android:textSize="14sp"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
     </LinearLayout>
 
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

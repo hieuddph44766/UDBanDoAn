@@ -11,10 +11,11 @@ public class Product implements Serializable {
     private int totalSale;
     private int price;
     private int quantity;
-    private String imageUrl; // Tên file ảnh (dạng String, ví dụ: "banh_mi_pate")
-    private int imageResId;  // ID của ảnh trong drawable (dạng int)
+    private String imageUrl;
+    private int imageResId;
+    private String oderDate;
     private String imageName;
-    // Constructor không tham số
+
     public Product() {
     }
 
@@ -41,6 +42,14 @@ public class Product implements Serializable {
         this.imageResId = imageResId;
     }
 
+    public Product(String name, String description, int idCategory, int price, int imageResId, String oderDate) {
+        this.name = name;
+        this.description = description;
+        this.idCategory = idCategory;
+        this.price = price;
+        this.imageResId = imageResId;
+        this.oderDate = oderDate;
+    }
     // Getters và Setters cho các thuộc tính
 
     public int getIdProduct() {
@@ -128,5 +137,13 @@ public class Product implements Serializable {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
+    }
+
+    public String getOderDate() {
+        return oderDate;
+    }
+
+    public void setOderDate(String oderDate) {
+        this.oderDate = oderDate;
     }
 }
