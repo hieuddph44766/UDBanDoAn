@@ -40,11 +40,9 @@ public class AdminActivity extends AppCompatActivity {
             return insets;
         });
 
-        user = getIntent().getStringExtra("user");
         recyclerView = findViewById(R.id.re_Cate);
-
-        productDAO = new ProductDAO(this);
-        productAdapter = new ProductAdapter(this, productDAO.getAllProducts());
+        productDAO=new ProductDAO(this);
+        productAdapter=new ProductAdapter(this,productDAO.getAllProducts());
         recyclerView.setAdapter(productAdapter);
 
         bottom_NaView = findViewById(R.id.bottom_NaView);
@@ -52,6 +50,8 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.menu_Home) {
+                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                    overridePendingTransition(0, 0);
                     return true;
                 } else if (item.getItemId() == R.id.menu_hoadon) {
                     startActivity(new Intent(getApplicationContext(), QuanLyDHAcitivity.class));

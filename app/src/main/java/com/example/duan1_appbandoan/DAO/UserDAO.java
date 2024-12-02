@@ -36,20 +36,16 @@ public class UserDAO{
         db.close();
         return result;
     }
-
-    // Cập nhật User
-    public int updateUser(User user) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+    public boolean updatePassword(String username, String newPassword) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("userName", user.getUserName());
-        values.put("password", user.getPassword());
-        values.put("email", user.getEmail());
-        values.put("address", user.getAddress());
-        values.put("phone", user.getPhone());
-        values.put("role", user.getRole());
-        int result = db.update("user", values, "id_user=?", new String[]{String.valueOf(user.getIdUser())});
+        values.put("password", newPassword);
+
+        // Cập nhật mật khẩu dựa vào tên người dùng
+        int rows = db.update("user", values, "userName = ?", new String[]{username});
         db.close();
-        return result;
+
+        return rows > 0; // Trả về true nếu cập nhật thành công
     }
 
     // Xóa User

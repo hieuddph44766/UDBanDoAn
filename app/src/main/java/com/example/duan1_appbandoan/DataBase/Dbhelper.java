@@ -56,7 +56,7 @@ public class Dbhelper extends SQLiteOpenHelper {
                   "    id_Category INTEGER NOT NULL,\n" +
                   "    total_sale INTEGER NOT NULL,\n" +
                   "    image TEXT NOT NULL,\n" +
-                  "    price INTEGER NOT NULL,\n" +  // Thêm giá sản phẩm
+                  "    price INTEGER NOT NULL,\n" +
                   "    FOREIGN KEY (id_Review) REFERENCES review(id_Review),\n" +
                   "    FOREIGN KEY (id_Category) REFERENCES category(id_Category)\n" +
                   ")";

@@ -26,8 +26,9 @@ public class ProductDAO {
         ContentValues values = new ContentValues();
         values.put("name", product.getName());
         values.put("description", product.getDescription());
-        values.put("price", product.getPrice());
+        values.put("total_sale", product.getTotalSale());
         values.put("id_Category", product.getIdCategory());
+
 
         // Kiểm tra và gán giá trị mặc định cho id_Review nếu không có giá trị
         if (product.getIdReview() == null) {
@@ -35,8 +36,8 @@ public class ProductDAO {
         } else {
             values.put("id_Review", product.getIdReview());
         }
-        values.put("total_sale", 0);
-        values.put("image", "");
+        values.put("price", 0);
+        values.put("image", product.getImageUrl());
         long result = db.insert("product", null, values);
         db.close();
         return result != -1; // Trả về true nếu thêm thành công
@@ -48,15 +49,15 @@ public class ProductDAO {
         ContentValues values = new ContentValues();
         values.put("name", product.getName());
         values.put("description", product.getDescription());
+        values.put("total_sale", product.getTotalSale());
         if (product.getIdReview() == null) {
             values.put("id_Review", -1);  // Gán giá trị mặc định, chẳng hạn là -1
         } else {
             values.put("id_Review", product.getIdReview());
         }
         values.put("id_Category", product.getIdCategory());
-        values.put("total_sale", "");
+        values.put("price", "");
         values.put("image", "");
-        values.put("price", product.getPrice());
         int result = db.update("product", values, "id_product=?", new String[]{String.valueOf(product.getIdProduct())});
         db.close();
         return result;
@@ -97,13 +98,13 @@ public class ProductDAO {
     }
 
     // Thêm sản phẩm vào giỏ hàng
-    public long addToCart(int orderId, int productId, int quantity, int price) {
+    public long addToCart(int orderId, int productId, int quantity, int total_sale) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("id_Order", orderId);
         values.put("id_Product", productId);
         values.put("quantity", quantity);
-        values.put("totalprice", quantity * price);
+        values.put("totalprice", quantity * total_sale);
         long result = db.insert("order_detail", null, values);
         db.close();
         return result;

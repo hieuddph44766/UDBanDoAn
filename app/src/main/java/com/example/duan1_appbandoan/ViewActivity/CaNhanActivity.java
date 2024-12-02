@@ -3,18 +3,28 @@ package com.example.duan1_appbandoan.ViewActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.duan1_appbandoan.AdminActivity;
+import com.example.duan1_appbandoan.DAO.UserDAO;
+import com.example.duan1_appbandoan.DataBase.Dbhelper;
 import com.example.duan1_appbandoan.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class CaNhanActivity extends AppCompatActivity {
+    UserDAO dao=new UserDAO(this);
+    BottomNavigationView bottom_NaView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +37,39 @@ public class CaNhanActivity extends AppCompatActivity {
         Button btnChangePassword = findViewById(R.id.btn_changePassword);
         Button btnLogout = findViewById(R.id.btn_logout);
         Button btn_qlsp = findViewById(R.id.btn_qlsp);
+
+        bottom_NaView = findViewById(R.id.bottom_NaView);
+        bottom_NaView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.menu_CaNhan) {
+                    startActivity(new Intent(getApplicationContext(), CaNhanActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (item.getItemId() == R.id.menu_hoadon) {
+                    // Chạy Activity quản lý đơn hàng
+                    startActivity(new Intent(getApplicationContext(), QuanLyDHAcitivity.class));
+                    overridePendingTransition(0, 0);
+                    bottom_NaView.setSelectedItemId(R.id.menu_hoadon); // Đánh dấu mục được chọn
+                    return true;
+                } else if (item.getItemId() == R.id.menu_thongke) {
+                    // Chạy Activity thống kê
+                    startActivity(new Intent(getApplicationContext(), ThongKeActivity.class));
+                    overridePendingTransition(0, 0);
+                    bottom_NaView.setSelectedItemId(R.id.menu_thongke); // Đánh dấu mục được chọn
+                    return true;
+                } else if (item.getItemId() == R.id.menu_Home) {
+                    // Chạy Activity cá nhân
+                    startActivity(new Intent(getApplicationContext(), AdminActivity.class));
+                    overridePendingTransition(0, 0);
+                    bottom_NaView.setSelectedItemId(R.id.menu_CaNhan); // Đánh dấu mục được chọn
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+
 
         // Lấy thông tin người dùng (giả sử lấy từ Intent hoặc SharedPreferences)
         String userName = getIntent().getStringExtra("username");
@@ -60,14 +103,24 @@ public class CaNhanActivity extends AppCompatActivity {
         builder.setView(input);
 
         // Xử lý khi người dùng nhấn OK
-        builder.setPositiveButton("OK", (dialog, which) -> {
-            String newPassword = input.getText().toString();
-            if (newPassword.isEmpty()) {
-                Toast.makeText(this, "Mật khẩu không được để trống!", Toast.LENGTH_SHORT).show();
-            } else {
-                // Gọi API hoặc lưu mật khẩu mới vào SharedPreferences
-                Toast.makeText(this, "Đổi mật khẩu thành công!", Toast.LENGTH_SHORT).show();
-            }
+            builder.setPositiveButton("OK", (dialog, which) -> {
+                String userName = input.getText().toString();
+                String newPassword = input.getText().toString();
+
+                if (newPassword.isEmpty()) {
+                    Toast.makeText(this, "Mật khẩu không được để trống!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Gọi DatabaseHelper để lưu mật khẩu mới
+                    boolean isUpdated = dao.updatePassword(userName, newPassword);
+
+                    if (isUpdated) {
+                        Toast.makeText(this, "Đổi mật khẩu thành công!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Đổi mật khẩu thất bại!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                Log.d("UserDAO", "Updating password for user: " + userName);
+
         });
 
         // Xử lý khi người dùng nhấn Hủy

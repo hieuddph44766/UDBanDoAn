@@ -46,23 +46,19 @@ public class ProductDetailActivity extends AppCompatActivity {
             tvProductNameDetail.setText(product.getName());
             tvProductDescriptionDetail.setText(product.getDescription());
             NumberFormat formatter = NumberFormat.getInstance(Locale.getDefault());
-            tvProductPriceDetail.setText("Giá: " + formatter.format(product.getPrice()) + " VND");
-            // Nếu có ảnh, bạn có thể load qua Glide hoặc Picasso
+            tvProductPriceDetail.setText("Giá: " + formatter.format(product.getTotalSale()) + " VND");
         }
 
         if (product.getImageResId() != 0) {
             imgProductDetail.setImageResource(product.getImageResId());
         } else {
-            imgProductDetail.setImageResource(R.drawable.ic_launcher_background); // Ảnh mặc định nếu không có
+            imgProductDetail.setImageResource(R.drawable.ic_launcher_background);
         }
 
-
-        // Thêm sản phẩm vào giỏ hàng khi nhấn nút
         btnAddToCart.setOnClickListener(view -> {
 
             int orderId = 1;
             int quantity = 1;
-
             // Thêm sản phẩm vào giỏ hàng
             long result = productDAO.addToCart(orderId, product.getIdProduct(), quantity, product.getPrice());
 

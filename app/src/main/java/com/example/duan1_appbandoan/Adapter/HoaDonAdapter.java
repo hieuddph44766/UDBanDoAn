@@ -30,7 +30,6 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         View view = LayoutInflater.from(context).inflate(R.layout.item_hoadon, parent, false);
         return new HoaDonViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull HoaDonViewHolder holder, int position) {
         Product product = productList.get(position);

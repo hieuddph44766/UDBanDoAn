@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.duan1_appbandoan.Model.Product;
 import com.example.duan1_appbandoan.R;
 import com.example.duan1_appbandoan.ViewActivity.QuanLySP;
@@ -31,18 +33,21 @@ public class QLSPAdapter extends RecyclerView.Adapter<QLSPAdapter.ProductViewHol
         View view = LayoutInflater.from(context).inflate(R.layout.item_qlsp, parent, false);
         return new ProductViewHolder(view);
     }
-
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.txtProductName.setText(product.getName());
-        holder.txtProductPrice.setText("Giá: " + product.getPrice() + " VNĐ");
+        holder.txtProductPrice.setText("Giá: " + product.getTotalSale() + " VNĐ");
+        Glide.with(context)
+                .load(product.getImageResId()) // URL ảnh
+                .placeholder(R.drawable.ic_launcher_background) // Ảnh mặc định
+                .into(holder.imgProduct);
+
         // Sự kiện sửa sản phẩm
         holder.itemView.setOnClickListener(v -> {
             // Gọi phương thức sửa sản phẩm
             ((QuanLySP) context).showEditProductDialog(product);
         });
-
         // Sự kiện xóa sản phẩm
         holder.itemView.setOnLongClickListener(v -> {
             // Gọi phương thức xóa sản phẩm
@@ -71,6 +76,7 @@ public class QLSPAdapter extends RecyclerView.Adapter<QLSPAdapter.ProductViewHol
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
         TextView txtProductName, txtProductPrice;
         Button btnEdit, btnDelete;
+        ImageView imgProduct;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +84,7 @@ public class QLSPAdapter extends RecyclerView.Adapter<QLSPAdapter.ProductViewHol
             txtProductPrice = itemView.findViewById(R.id.txt_product_price);
             btnEdit = itemView.findViewById(R.id.btn_edit);
             btnDelete = itemView.findViewById(R.id.btn_delete);
+            imgProduct = itemView.findViewById(R.id.img_product);
         }
     }
 }

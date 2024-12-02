@@ -13,7 +13,7 @@ public class Product implements Serializable {
     private int quantity;
     private String imageUrl; // Tên file ảnh (dạng String, ví dụ: "banh_mi_pate")
     private int imageResId;  // ID của ảnh trong drawable (dạng int)
-
+    private String imageName;
     // Constructor không tham số
     public Product() {
     }
@@ -121,5 +121,12 @@ public class Product implements Serializable {
 
     public void setImageResId(int imageResId) {
         this.imageResId = imageResId;
+    }
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
     }
 }

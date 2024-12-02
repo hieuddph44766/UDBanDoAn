@@ -24,16 +24,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     private List<Product> cartItems;
     private Context context;
     private ProductDAO productDAO;
-    private UpdateTotalPriceListener updateTotalPriceListener; // Interface để callback
+    private UpdateTotalPriceListener updateTotalPriceListener;
 
-    // Constructor
     public CartAdapter(List<Product> cartItems, Context context, ProductDAO productDAO) {
         this.cartItems = cartItems;
         this.context = context;
         this.productDAO = productDAO;
     }
 
-    // Đăng ký callback
     public void setUpdateTotalPriceListener(UpdateTotalPriceListener listener) {
         this.updateTotalPriceListener = listener;
     }
@@ -59,18 +57,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .error(R.drawable.ic_lock)
                 .into(holder.imgProduct);
 
-        // Tăng số lượng
         holder.btnIncrease.setOnClickListener(v -> {
             int newQuantity = product.getQuantity() + 1;
             product.setQuantity(newQuantity);
             productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getPrice());
             notifyItemChanged(position);
             if (updateTotalPriceListener != null) {
-                updateTotalPriceListener.onUpdateTotalPrice(); // Cập nhật lại tổng giá
+                updateTotalPriceListener.onUpdateTotalPrice();
             }
         });
 
-        // Giảm số lượng
         holder.btnDecrease.setOnClickListener(v -> {
             if (product.getQuantity() > 1) {
                 int newQuantity = product.getQuantity() - 1;
@@ -78,7 +74,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getPrice());
                 notifyItemChanged(position);
                 if (updateTotalPriceListener != null) {
-                    updateTotalPriceListener.onUpdateTotalPrice(); // Cập nhật lại tổng giá
+                    updateTotalPriceListener.onUpdateTotalPrice();
                 }
             }
         });

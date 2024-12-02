@@ -6,5 +6,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewActivity.ThongKeActivity">
+    <TextView
+        android:id="@+id/txt_manage_products"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="16dp"
+        android:text="THỐNG KÊ"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_NaView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_admin"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

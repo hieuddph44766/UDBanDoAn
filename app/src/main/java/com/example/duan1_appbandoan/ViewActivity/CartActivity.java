@@ -63,7 +63,6 @@ public class CartActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("cartItems", (Serializable) cartItems);
                     intent.putExtras(bundle);
-
                     // Mở HoaDonActivity
                     startActivity(intent);
                 } else {
@@ -71,20 +70,13 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
         cartAdapter.setUpdateTotalPriceListener(new CartAdapter.UpdateTotalPriceListener() {
             @Override
             public void onUpdateTotalPrice() {
                 updateTotalPrice(cartItems);
             }
         });
-
-
     }
-    // Trong CartActivity
     private void updateTotalPrice(List<Product> cartItems) {
         double total = 0;
         // Tính tổng giá trị giỏ hàng
@@ -94,6 +86,4 @@ public class CartActivity extends AppCompatActivity {
         TextView tvTotalPrice = findViewById(R.id.tvTotalPrice); // Đảm bảo bạn có TextView này trong layout
         tvTotalPrice.setText("Total: VND" + total);
     }
-
-
 }

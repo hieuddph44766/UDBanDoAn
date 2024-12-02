@@ -33,4 +33,10 @@
         android:hint="Danh mục"
         android:inputType="text" />
 
+    <Spinner
+        android:id="@+id/spinnerImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chọn ảnh" />
+
 </LinearLayout>

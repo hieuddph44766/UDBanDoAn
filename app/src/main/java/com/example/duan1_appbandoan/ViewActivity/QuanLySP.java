@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -53,6 +55,13 @@ public class QuanLySP extends AppCompatActivity {
     private void showAddProductDialog() {
         // Inflate layout cho Dialog
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_add_sp, null);
+        Spinner spinnerImg = dialogView.findViewById(R.id.spinnerImg);
+
+// Danh sách ảnh từ drawable
+        String[] drawableImages = {"banh_mi", "bun_cha", "xoi_xeo"}; // Tên file ảnh trong drawable
+        ArrayAdapter<String> adapterImg = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, drawableImages);
+        adapterImg.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerImg.setAdapter(adapterImg);
 
         // Khởi tạo các thành phần trong Dialog
         EditText edtProductName = dialogView.findViewById(R.id.edtProductName);
@@ -64,16 +73,12 @@ public class QuanLySP extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Thêm sản phẩm")
                 .setView(dialogView)
-                .setPositiveButton("Thêm", null) // Tạm thời không xử lý nút "Thêm"
-                .setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());  // Xử lý nút Hủy
+                .setPositiveButton("Thêm", null)
+                .setNegativeButton("Hủy", (dialog, which) -> dialog.dismiss());
 
-        // Tạo dialog
         AlertDialog dialog = builder.create();
-
-        // Hiển thị Dialog
         dialog.show();
 
-        // Xử lý sự kiện khi nhấn nút "Thêm"
         Button btnAdd = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
         btnAdd.setOnClickListener(view -> {
             // Lấy dữ liệu từ các trường nhập
@@ -81,6 +86,7 @@ public class QuanLySP extends AppCompatActivity {
             String description = edtProductDescription.getText().toString().trim();
             String priceText = edtProductPrice.getText().toString().trim();
             String categoryText = edtProductCategory.getText().toString().trim();
+            String selectedImage = spinnerImg.getSelectedItem().toString();
 
             // Kiểm tra dữ liệu rỗng
             if (name.isEmpty() || description.isEmpty() || priceText.isEmpty() || categoryText.isEmpty()) {
@@ -101,8 +107,9 @@ public class QuanLySP extends AppCompatActivity {
             Product product = new Product();
             product.setName(name);
             product.setDescription(description);
-            product.setPrice(price);
+            product.setTotalSale(price);
             product.setIdCategory(category);
+            product.setImageUrl(selectedImage);
 
             // Thêm sản phẩm vào cơ sở dữ liệu
             boolean isInserted = productDAO.insertProduct(product);
@@ -126,12 +133,12 @@ public class QuanLySP extends AppCompatActivity {
         EditText edtProductPrice = dialogView.findViewById(R.id.edtProductPrice);
         EditText edtProductCategory = dialogView.findViewById(R.id.edtProductCategory);
 
+
         // Điền sẵn thông tin của sản phẩm vào các trường
         edtProductName.setText(product.getName());
         edtProductDescription.setText(product.getDescription());
         edtProductPrice.setText(String.valueOf(product.getPrice()));
         edtProductCategory.setText(String.valueOf(product.getIdCategory()));
-
         // Tạo Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Sửa sản phẩm")
@@ -153,6 +160,7 @@ public class QuanLySP extends AppCompatActivity {
             String description = edtProductDescription.getText().toString().trim();
             String priceText = edtProductPrice.getText().toString().trim();
             String categoryText = edtProductCategory.getText().toString().trim();
+            String Image = edtProductCategory.getText().toString().trim();
 
             // Kiểm tra dữ liệu rỗng
             if (name.isEmpty() || description.isEmpty() || priceText.isEmpty() || categoryText.isEmpty()) {
@@ -172,8 +180,9 @@ public class QuanLySP extends AppCompatActivity {
             // Cập nhật thông tin sản phẩm
             product.setName(name);
             product.setDescription(description);
-            product.setPrice(price);
+            product.setTotalSale(price);
             product.setIdCategory(category);
+            product.setImageName(Image);
 
             // Cập nhật sản phẩm vào cơ sở dữ liệu
             int result = productDAO.updateProduct(product);
