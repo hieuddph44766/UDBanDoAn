@@ -60,7 +60,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.btnIncrease.setOnClickListener(v -> {
             int newQuantity = product.getQuantity() + 1;
             product.setQuantity(newQuantity);
-            productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getPrice());
+            productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getTotalSale());
             notifyItemChanged(position);
             if (updateTotalPriceListener != null) {
                 updateTotalPriceListener.onUpdateTotalPrice();
@@ -71,7 +71,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             if (product.getQuantity() > 1) {
                 int newQuantity = product.getQuantity() - 1;
                 product.setQuantity(newQuantity);
-                productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getPrice());
+                productDAO.updateCartItem(1, product.getIdProduct(), newQuantity, product.getTotalSale());
                 notifyItemChanged(position);
                 if (updateTotalPriceListener != null) {
                     updateTotalPriceListener.onUpdateTotalPrice();
@@ -97,10 +97,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     .show();
         });
 
-        Glide.with(context)
-                .load(product.getImageResId())
-                .error(R.drawable.img_buncha)
-                .into(holder.imgProduct);
+
     }
 
     @Override

@@ -131,6 +131,7 @@ public class Product implements Serializable {
     public void setImageResId(int imageResId) {
         this.imageResId = imageResId;
     }
+
     public String getImageName() {
         return imageName;
     }

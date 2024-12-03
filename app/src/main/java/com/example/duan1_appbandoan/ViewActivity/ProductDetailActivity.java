@@ -60,7 +60,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             int orderId = 1;
             int quantity = 1;
             // Thêm sản phẩm vào giỏ hàng
-            long result = productDAO.addToCart(orderId, product.getIdProduct(), quantity, product.getPrice());
+            long result = productDAO.addToCart(orderId, product.getIdProduct(), quantity, product.getTotalSale());
 
             if (result > 0) {
                 Toast.makeText(ProductDetailActivity.this, "Đã thêm sản phẩm vào giỏ hàng!", Toast.LENGTH_SHORT).show();

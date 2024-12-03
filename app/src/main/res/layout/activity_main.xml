@@ -35,7 +35,7 @@
                     android:src="@drawable/profile"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-                <!-- Dòng chữ "Welcome" -->
+
                 <TextView
                     android:id="@+id/tv_wCome"
                     android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
                 android:layout_margin="6dp"
                 android:text="THỰC ĐƠN"
                 android:textColor="#FFFFFF"
-                android:textSize="35sp"
+                android:textSize="25sp"
                 android:textStyle="bold|italic"
                 android:textAlignment="center"
                 android:background="@drawable/bg_gradient"
@@ -97,7 +97,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:queryHint="Tim kiem san pham" />
+                app:queryHint="Tìm kiếm sản phẩm" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/re_Cate"
