@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context=".Activities.DangKyThongTinActivities">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textColor="#FF5E00"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:gravity="center"
+        android:text="Thông tin cá nhân"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/edtAvatar"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/avatar" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:hint="Họ và tên"
+        app:startIconDrawable="@drawable/name_24"
+>
+        <EditText
+            android:id="@+id/edtHoten"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Email"
+        app:startIconDrawable="@drawable/ic_email"
+>
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Số điện thoại"
+        app:startIconDrawable="@drawable/circle_phone_24"
+>
+        <EditText
+            android:id="@+id/edtSdt"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Địa chỉ"
+        app:startIconDrawable="@drawable/map_24"
+>
+        <EditText
+            android:id="@+id/edtDiachi"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Ngày sinh"
+        app:startIconDrawable="@drawable/calendar_24"
+>
+        <EditText
+            android:id="@+id/edtNgaysinh"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdo_GT_Nam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nam" />
+
+        <RadioButton
+            android:id="@+id/rdo_BTN_Nu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24sp"
+            android:text="Nữ" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/btnDangkythongtin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_background_orange"
+        android:text="Hoàn tất" />
+</LinearLayout>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Cart_items_View">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="12">
+
+        <ImageView
+            android:id="@+id/Cart_items_img"
+            android:src="@drawable/meat"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:scaleType="centerCrop"/>
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_weight="10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_marginStart="10dp"
+                android:textColor="@color/black"
+                android:id="@+id/Cart_items_name"
+                android:text="Coca-cola"
+                android:textStyle="bold"
+                android:textSize="26sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginStart="10dp"
+                android:id="@+id/Cart_items_price"
+                android:textSize="22sp"
+                android:textColor="@color/red"
+                android:text="45000đ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="15">
+
+                <ImageButton
+                    android:id="@+id/Cart_items_remove"
+                    android:src="@drawable/remove"
+                    android:backgroundTintMode="screen"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <EditText
+                    android:id="@+id/Cart_items_amount_edt"
+                    android:text="1"
+                    android:background="@drawable/boder_edittext"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:layout_weight="5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"/>
+
+                <TextView
+                    android:id="@+id/Cart_items_amount_txt"
+                    android:visibility="gone"
+                    android:layout_weight="6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <ImageButton
+                    android:id="@+id/Cart_items_plus"
+                    android:src="@drawable/plus"
+                    android:backgroundTintMode="screen"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        </LinearLayout>
+
+</androidx.cardview.widget.CardView>
