@@ -27,7 +27,8 @@ import com.example.UDBanDoAn.DAO.SanPhamDAO;
 import com.example.UDBanDoAn.MODEL.ChiTietDatHang;
 import com.example.UDBanDoAn.MODEL.DatHang;
 import com.example.UDBanDoAn.MODEL.SanPham;
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

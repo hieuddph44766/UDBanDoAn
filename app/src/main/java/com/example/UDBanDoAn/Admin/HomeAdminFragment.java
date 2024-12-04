@@ -11,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.UDBanDoAn.Adapter.ViewSanPhamAdapter;
-import com.example.UDBanDoAn.R;
+
+import com.example.duan1_appbandoan.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 

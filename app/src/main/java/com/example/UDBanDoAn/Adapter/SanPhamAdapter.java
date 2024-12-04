@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.UDBanDoAn.Activities.SanPhamDetail;
 import com.example.UDBanDoAn.MODEL.SanPham;
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 import java.text.DecimalFormat;
 import java.util.List;

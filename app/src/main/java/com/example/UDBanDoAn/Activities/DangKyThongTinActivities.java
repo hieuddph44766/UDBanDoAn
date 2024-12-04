@@ -16,7 +16,8 @@ import com.example.UDBanDoAn.DAO.TaikhoanDAO;
 import com.example.UDBanDoAn.DAO.ThongTinNguoiDungDAO;
 import com.example.UDBanDoAn.MODEL.TaiKhoan;
 import com.example.UDBanDoAn.MODEL.ThongTinNguoiDung;
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

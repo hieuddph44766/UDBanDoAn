@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.UDBanDoAn.DAO.TaikhoanDAO;
 import com.example.UDBanDoAn.MODEL.Itemclick;
 import com.example.UDBanDoAn.MODEL.TaiKhoan;
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 import org.jetbrains.annotations.NotNull;
 

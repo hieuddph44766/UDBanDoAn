@@ -24,8 +24,9 @@ import com.example.UDBanDoAn.MODEL.DatHang;
 import com.example.UDBanDoAn.MODEL.TaiKhoan;
 import com.example.UDBanDoAn.MODEL.ThongTinNguoiDung;
 import com.example.UDBanDoAn.MainActivity;
-import com.example.UDBanDoAn.R;
+
 import com.example.UDBanDoAn.ultis.SendMail;
+import com.example.duan1_appbandoan.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 

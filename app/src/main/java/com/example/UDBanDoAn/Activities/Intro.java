@@ -6,7 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 public class Intro extends AppCompatActivity {
 

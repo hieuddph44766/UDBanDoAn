@@ -12,7 +12,8 @@ import androidx.annotation.Nullable;
 
 
 import com.example.UDBanDoAn.MODEL.LoaiSanPham;
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 import java.util.List;
 

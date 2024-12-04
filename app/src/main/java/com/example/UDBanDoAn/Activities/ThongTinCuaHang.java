@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 public class ThongTinCuaHang extends AppCompatActivity {
     WebView wed;

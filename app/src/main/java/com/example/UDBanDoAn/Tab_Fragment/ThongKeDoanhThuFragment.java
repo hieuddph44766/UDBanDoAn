@@ -19,7 +19,8 @@ import com.example.UDBanDoAn.Adapter.OrderHistoryAdapter;
 import com.example.UDBanDoAn.DAO.DatHangDAO;
 import com.example.UDBanDoAn.DAO.ThongKeDAO;
 import com.example.UDBanDoAn.MODEL.DatHang;
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

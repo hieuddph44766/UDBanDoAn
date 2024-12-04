@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.UDBanDoAn.Adapter.ThongTinNguoiDungAdapter;
 import com.example.UDBanDoAn.DAO.ThongTinNguoiDungDAO;
 import com.example.UDBanDoAn.MODEL.ThongTinNguoiDung;
-import com.example.UDBanDoAn.R;
+import com.example.duan1_appbandoan.R;
+
 
 import java.util.List;
 
