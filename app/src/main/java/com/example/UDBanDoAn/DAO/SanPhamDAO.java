@@ -87,15 +87,21 @@ public class SanPhamDAO {
 
     public SanPham getID(int id) {
         SQLiteDatabase sqLiteDatabase = dbhelper.getWritableDatabase();
-        String sql = "Select * from SanPham where id=?";
+        String sql = "SELECT * FROM SanPham WHERE Id=?";
         Cursor cursor = sqLiteDatabase.rawQuery(sql, new String[]{String.valueOf(id)});
 
-        cursor.moveToFirst();
-
-        return new SanPham(cursor.getInt(0), cursor.getString(1),
-                cursor.getString(2), cursor.getInt(3), cursor.getString(4),
-                cursor.getString(5), cursor.getString(6), cursor.getInt(7));
+        if (cursor != null && cursor.moveToFirst()) { // Kiểm tra dữ liệu
+            SanPham sanPham = new SanPham(cursor.getInt(0), cursor.getString(1),
+                    cursor.getString(2), cursor.getInt(3), cursor.getString(4),
+                    cursor.getString(5), cursor.getString(6), cursor.getInt(7));
+            cursor.close(); // Đóng cursor
+            return sanPham;
+        } else {
+            if (cursor != null) cursor.close(); // Đóng cursor nếu không có dữ liệu
+            return null; // Trả về null nếu không tìm thấy sản phẩm
+        }
     }
+
 
     public List<SanPham> getSpTT(int loaiSP, int idSP) {
         List<SanPham> list = new ArrayList<>();

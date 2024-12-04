@@ -13,8 +13,6 @@
         android:orientation="vertical">
 
 
-
-
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
@@ -74,6 +72,7 @@
                 android:layout_margin="10dp"
                 android:text="SẢN PHẨM BÁN CHẠY"
                 android:textColor="@color/red"
+                android:textStyle="bold"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -101,6 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="TẤT CẢ SẢN PHẨM"
+                    android:textStyle="bold"
                     android:textColor="@color/red"
                     android:textSize="20sp" />
 
@@ -112,6 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:textColor="@color/red"
+                    android:textStyle="bold"
                     android:text="Hiện tất cả" />
 
             </LinearLayout>

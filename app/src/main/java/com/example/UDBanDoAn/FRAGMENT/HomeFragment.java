@@ -34,6 +34,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -61,7 +62,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         anhXa();
-//        autoSidelImage();
+        autoSidelImage();
         Home_TIL_findFood.setStartIconOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SearchItems.class);
             intent.putExtra("search", edt_findFood.getText().toString().trim());
@@ -180,5 +181,20 @@ public class HomeFragment extends Fragment {
         indicator = view.findViewById(R.id.circle);
         Home_Show_All = view.findViewById(R.id.Home_Show_All);
     }
+
+    private void autoSidelImage() {
+        if (listImage != null && listImage.size() > 0) {
+            timer = new Timer();
+            timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+                    int currentItem = viewPager.getCurrentItem();
+                    int nextItem = (currentItem + 1) % listImage.size();
+                    viewPager.post(() -> viewPager.setCurrentItem(nextItem));
+                }
+            }, 3000, 3000);  // Delay 3 giây và tự động chuyển mỗi 3 giây
+        }
+    }
+
 
 }
