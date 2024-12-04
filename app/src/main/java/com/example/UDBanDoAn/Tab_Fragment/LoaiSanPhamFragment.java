@@ -117,7 +117,7 @@ public class LoaiSanPhamFragment extends Fragment {
         add_anh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                openImage();
+//                openImgea();
                 openImageGallery();
             }
         });
@@ -133,7 +133,9 @@ public class LoaiSanPhamFragment extends Fragment {
                 @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm dd/MM/yyyy");
                 String text = simpleDateFormat.format(calendar.getTime());
                 sanPham.setNameLoaisanpham(ten);
+                sanPham.setCreateLoaisanpham(text);
                 sanPham.setImgLoaisanpham(link);
+                sanPham.setUpdatedLoaisanpham(text);
                 sanPham.setIdCuahang(0);
 
                 if (sanPhamDAO.themLoaiSanPham(sanPham)) {
@@ -152,7 +154,7 @@ public class LoaiSanPhamFragment extends Fragment {
 
     // hoi ve phan nay
 
-    private void openImage() {
+    private void openImgea() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getActivity().getPackageManager()) !=null){
             activityResultLauncher.launch(intent);

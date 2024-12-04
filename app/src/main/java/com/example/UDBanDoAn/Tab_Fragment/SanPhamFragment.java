@@ -227,7 +227,7 @@ public class SanPhamFragment extends Fragment {
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             activityResultLauncher.launch(intent);
         } else {
-            Toast.makeText(getContext(), "app ko ho tro action", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
     }
     private void openImageGallery() {
@@ -235,7 +235,7 @@ public class SanPhamFragment extends Fragment {
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             activityResultLauncher.launch(intent);
         } else {
-            Toast.makeText(getContext(), "Không có ứng dụng hỗ trợ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
         }
     }
 }

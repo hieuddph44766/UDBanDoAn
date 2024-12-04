@@ -123,11 +123,11 @@ public class HomeFragment extends Fragment {
         }
         if (sanPhamDAO.getDSSanPham().isEmpty()) {
             sanPhamDAO.themSanpham(new SanPham(0, "Phở bò", String.valueOf(R.drawable.phobo), 35000
-                    , "1", "28/03/2024", "28/03/2024", 1));
+                    , "1", "28/03/2024", "3/11/2024", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Mì cay", String.valueOf(R.drawable.micay), 35000
-                    , "1", "28/03/2024", "28/03/2024", 1));
+                    , "1", "28/03/2024", "3/11/2024", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Bún bò", String.valueOf(R.drawable.bunbonoback), 35000
-                    , "1", "28/03/2024", "28/03/2024", 1));
+                    , "1", "28/03/2024", "3/11/2024", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Khoai tây chiên", String.valueOf(R.drawable.khaitaychiennoback), 35000
                     , "2", "28/03/2024", "28/03/2024", 1));
             sanPhamDAO.themSanpham(new SanPham(0, "Hot dog", String.valueOf(R.drawable.hotdog), 35000

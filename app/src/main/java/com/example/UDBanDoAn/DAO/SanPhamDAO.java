@@ -47,9 +47,9 @@ public class SanPhamDAO {
         contentValues.put("Updated", sanPham.getUpdatedSanpham());
         contentValues.put("Status", sanPham.getStatusSanpham());
         long check = sqLiteDatabase.insert("SanPham", null, contentValues);
-        if (check == -1)
-            return false;
-        return true;
+        if (check == -1){
+            return false;}
+        else{return true;}
     }
 
     public boolean capnhatSanpham(SanPham sanPham) {

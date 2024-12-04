@@ -20,5 +20,16 @@
         android:id="@+id/txt_ten_loai"
         android:layout_marginLeft="20dp"
         />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="25/03/2024"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/txt_anh_loai_sp"
+        android:layout_below="@+id/txt_ten_loai"
+        android:textSize="20sp"
+        android:id="@+id/txt_ngay_tao"
+        android:visibility="invisible"
+        android:layout_marginLeft="20dp"
+        />
 </RelativeLayout>
