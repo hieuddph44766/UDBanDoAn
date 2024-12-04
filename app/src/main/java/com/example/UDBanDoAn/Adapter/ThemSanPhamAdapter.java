@@ -27,7 +27,7 @@ import com.example.UDBanDoAn.DAO.LoaiSanPhamDAO;
 import com.example.UDBanDoAn.DAO.SanPhamDAO;
 import com.example.UDBanDoAn.MODEL.LoaiSanPham;
 import com.example.UDBanDoAn.MODEL.SanPham;
-import com.example.duan1_appbandoan.R;
+import com.example.UDBanDoAn.R;
 
 
 import java.text.DecimalFormat;

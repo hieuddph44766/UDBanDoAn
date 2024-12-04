@@ -19,7 +19,7 @@ import com.example.UDBanDoAn.DAO.ChiTietDatHangDAO;
 import com.example.UDBanDoAn.DAO.ThongTinNguoiDungDAO;
 import com.example.UDBanDoAn.MODEL.DatHang;
 import com.example.UDBanDoAn.MODEL.ThongTinNguoiDung;
-import com.example.duan1_appbandoan.R;
+import com.example.UDBanDoAn.R;
 
 
 import java.text.DecimalFormat;

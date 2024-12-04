@@ -16,7 +16,7 @@ import android.widget.Spinner;
 import com.example.UDBanDoAn.Adapter.OrderHistoryAdapter;
 import com.example.UDBanDoAn.DAO.DatHangDAO;
 import com.example.UDBanDoAn.MODEL.DatHang;
-import com.example.duan1_appbandoan.R;
+import com.example.UDBanDoAn.R;
 
 
 import java.util.ArrayList;

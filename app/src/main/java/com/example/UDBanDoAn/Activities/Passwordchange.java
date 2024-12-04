@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 import com.example.UDBanDoAn.DAO.TaikhoanDAO;
 
-import com.example.duan1_appbandoan.R;
+
+import com.example.UDBanDoAn.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class Passwordchange extends AppCompatActivity {

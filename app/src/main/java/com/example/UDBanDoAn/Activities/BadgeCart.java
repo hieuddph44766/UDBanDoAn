@@ -24,8 +24,9 @@ import com.example.UDBanDoAn.DAO.ChiTietDatHangDAO;
 import com.example.UDBanDoAn.DAO.DatHangDAO;
 import com.example.UDBanDoAn.MODEL.ChiTietDatHang;
 
+import com.example.UDBanDoAn.R;
 import com.example.UDBanDoAn.Service.CheckCartService;
-import com.example.duan1_appbandoan.R;
+
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
