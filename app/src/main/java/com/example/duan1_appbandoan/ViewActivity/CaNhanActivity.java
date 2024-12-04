@@ -37,6 +37,7 @@ public class CaNhanActivity extends AppCompatActivity {
         Button btnChangePassword = findViewById(R.id.btn_changePassword);
         Button btnLogout = findViewById(R.id.btn_logout);
         Button btn_qlsp = findViewById(R.id.btn_qlsp);
+        Button btnStatistics = findViewById(R.id.btn_ThongKe);
 
         bottom_NaView = findViewById(R.id.bottom_NaView);
         bottom_NaView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -70,6 +71,11 @@ public class CaNhanActivity extends AppCompatActivity {
             }
         });
 
+       //Thống Kê
+        btnStatistics.setOnClickListener(v -> {
+            Intent intent = new Intent(CaNhanActivity.this, ThongKeActivity.class);
+            startActivity(intent);
+        });
 
         // Lấy thông tin người dùng (giả sử lấy từ Intent hoặc SharedPreferences)
         String userName = getIntent().getStringExtra("username");

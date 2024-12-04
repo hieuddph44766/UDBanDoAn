@@ -1,10 +1,14 @@
 package com.example.duan1_appbandoan.DataBase;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DB_NAME="PNLIB";
@@ -99,6 +103,74 @@ public class Dbhelper extends SQLiteOpenHelper {
             // Tạo lại các bảng mới
             onCreate(db);
         }
+    }
+    public int getTotalUsers() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM user", null);
+        int totalUsers = 0;
+        if (cursor.moveToFirst()) {
+            totalUsers = cursor.getInt(0);
+        }
+        cursor.close();
+        return totalUsers;
+    }
+
+    public int getTotalRevenue() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM(totalprice) FROM order_detail", null);
+        int totalRevenue = 0;
+        if (cursor.moveToFirst()) {
+            totalRevenue = cursor.getInt(0);
+        }
+        cursor.close();
+        return totalRevenue;
+    }
+
+    public String getBestSellingProduct() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT name, SUM(quantity) as total FROM product " +
+                "INNER JOIN order_detail ON product.id_product = order_detail.id_Product " +
+                "GROUP BY name ORDER BY total DESC LIMIT 1", null);
+        String bestSelling = "N/A";
+        if (cursor.moveToFirst()) {
+            bestSelling = cursor.getString(0);
+        }
+        cursor.close();
+        return bestSelling;
+    }
+
+    public int getCompletedOrders() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM orders WHERE status = 1", null);
+        int completedOrders = 0;
+        if (cursor.moveToFirst()) {
+            completedOrders = cursor.getInt(0);
+        }
+        cursor.close();
+        return completedOrders;
+    }
+    public List<String> getTop10BestSellingProducts() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<String> topProducts = new ArrayList<>();
+
+        // Truy vấn lấy Top 10 sản phẩm bán chạy nhất
+        Cursor cursor = db.rawQuery(
+                "SELECT name, SUM(quantity) as total_sales FROM product " +
+                        "INNER JOIN order_detail ON product.id_product = order_detail.id_Product " +
+                        "GROUP BY name " +
+                        "ORDER BY total_sales DESC " +
+                        "LIMIT 10", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                // Lấy tên sản phẩm và số lượng bán
+                String productName = cursor.getString(0);
+                int totalSales = cursor.getInt(1);
+                topProducts.add(productName + " - Số lượng: " + totalSales);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return topProducts;
     }
 
 }

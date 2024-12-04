@@ -1,6 +1,9 @@
 package com.example.duan1_appbandoan.ViewActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -41,6 +44,9 @@ public class HoaDonActivity extends AppCompatActivity {
             }
             TextView tvTotal = findViewById(R.id.tvTotalPrice);
             tvTotal.setText("Tổng tiền: VND " + total);
+
+
+
         }
     }
 }

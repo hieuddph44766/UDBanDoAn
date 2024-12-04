@@ -1,9 +1,11 @@
 package com.example.duan1_appbandoan.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,7 +40,9 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
         holder.tvHDPrice.setText("VND " + product.getTotalSale());
         holder.tvTotalPrice.setText("Tổng: VND " + (product.getTotalSale() * product.getQuantity()));
         holder.tvOrderDate.setText("Ngày đặt: " + product.getOderDate());
+
     }
+
 
     @Override
     public int getItemCount() {
@@ -47,7 +51,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
 
     public static class HoaDonViewHolder extends RecyclerView.ViewHolder {
         TextView tvProductName, tvProductQuantity, tvHDPrice, tvTotalPrice, tvOrderDate;
-
+        ImageView ivBack;
         public HoaDonViewHolder(@NonNull View itemView) {
             super(itemView);
             tvProductName = itemView.findViewById(R.id.tvProductName);
@@ -55,6 +59,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.HoaDonView
             tvHDPrice = itemView.findViewById(R.id.tvHDPrice);
             tvTotalPrice = itemView.findViewById(R.id.tvTotalHDPrice);
             tvOrderDate = itemView.findViewById(R.id.tvOrderDate);
+            ivBack = itemView.findViewById(R.id.ivBack);
         }
     }
 }
